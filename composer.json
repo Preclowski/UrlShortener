@@ -21,7 +21,8 @@
         "doctrine/doctrine-fixtures-bundle": "2.2.*",
         "friendsofsymfony/rest-bundle": "1.4.1",
         "jms/serializer-bundle": "0.13.0",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "sensio/buzz-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3"
