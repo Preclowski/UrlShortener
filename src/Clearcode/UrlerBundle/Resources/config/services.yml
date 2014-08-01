@@ -1,0 +1,8 @@
+parameters:
+    clearcode_urler.generator.simple.class: Clearcode\UrlerBundle\Generator\SimpleTokenGenerator
+
+services:
+    clearcode_ruler.generator.simple:
+        class: %clearcode_urler.generator.simple.class%
+        arguments: ~
+

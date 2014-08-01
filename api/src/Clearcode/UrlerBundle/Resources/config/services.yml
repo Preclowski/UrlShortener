@@ -1,7 +1,0 @@
-parameters:
-#    clearcode_urler.example.class: Clearcode\UrlerBundle\Example
-
-services:
-#    clearcode_urler.example:
-#        class: %clearcode_urler.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]

@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new Clearcode\UrlerBundle\ClearcodeUrlerBundle(),
 
             //composer bundles
+            new Sensio\Bundle\BuzzBundle\SensioBuzzBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new FOS\UserBundle\FOSUserBundle(),
