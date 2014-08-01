@@ -17,12 +17,12 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
+            new Clearcode\UrlerBundle\ClearcodeUrlerBundle(),
 
             //composer bundles
             new JMS\SerializerBundle\JMSSerializerBundle(),
             new FOS\RestBundle\FOSRestBundle(),
-            new Clearcode\UrlerBundle\ClearcodeUrlerBundle(),
-
+            new FOS\UserBundle\FOSUserBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
         );
 

@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "48063d3de916a3836d18e6c52d22b46d",
+    "hash": "d62fcbeea7c4fbf30249e5db64bd0882",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -822,6 +822,74 @@
                 "rest"
             ],
             "time": "2014-07-11 21:09:03"
+        },
+        {
+            "name": "friendsofsymfony/user-bundle",
+            "version": "dev-master",
+            "target-dir": "FOS/UserBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
+                "reference": "1fe261de17abde29d6d461b7a93873d48b0efce7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/1fe261de17abde29d6d461b7a93873d48b0efce7",
+                "reference": "1fe261de17abde29d6d461b7a93873d48b0efce7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2",
+                "symfony/form": "~2.1",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/security-bundle": "~2.1"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "*",
+                "swiftmailer/swiftmailer": ">=4.3, <6.0",
+                "symfony/validator": "~2.1",
+                "symfony/yaml": "~2.1",
+                "twig/twig": "~1.5",
+                "willdurand/propel-typehintable-behavior": "dev-master"
+            },
+            "suggest": {
+                "willdurand/propel-typehintable-behavior": "Needed when using the propel implementation"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "FOS\\UserBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christophe Coevoet",
+                    "email": "stof@notk.org"
+                },
+                {
+                    "name": "FriendsOfSymfony Community",
+                    "homepage": "https://github.com/friendsofsymfony/FOSUserBundle/contributors"
+                },
+                {
+                    "name": "Thibault Duplessis",
+                    "email": "thibault.duplessis@gmail.com"
+                }
+            ],
+            "description": "Symfony FOSUserBundle",
+            "homepage": "http://friendsofsymfony.github.com",
+            "keywords": [
+                "User management"
+            ],
+            "time": "2014-08-01 02:49:19"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -2194,9 +2262,9 @@
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": [
-
-    ],
+    "stability-flags": {
+        "friendsofsymfony/user-bundle": 20
+    },
     "platform": {
         "php": ">=5.3.3"
     },
