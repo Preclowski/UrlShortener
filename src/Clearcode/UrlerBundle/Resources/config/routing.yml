@@ -1,3 +1,7 @@
 clearcode_urler_homepage:
-    path:     /hello/{name}
+    path:     /
     defaults: { _controller: ClearcodeUrlerBundle:Default:index }
+
+clearcode_urler_resolve:
+    path:     /{code}
+    defaults: { _controller: ClearcodeUrlerBundle:Url:resolve }
