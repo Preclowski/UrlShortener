@@ -52,18 +52,7 @@ class UrlController extends Controller
      */
     public function shortenAction($url)
     {
-        $urlObject = new Url();
-        $urlObject->setUrl($url);
-        $urlObject->setType(Url::TYPE_SIMPLE);
-        $code = $this->get('clearcode_ruler.generator.simple')->generate();
-        if (strlen($code) != 6) {
-            throw new InvalidTokenException();
-        }
-        $urlObject->setCode($code);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($urlObject);
-        $em->flush($urlObject);
 
         return $urlObject;
     }

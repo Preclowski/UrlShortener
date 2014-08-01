@@ -81,6 +81,18 @@ class Url
 
 
     /**
+     * Constructor
+     *
+     * @param string $url
+     * @param string $code
+     */
+    public function _construct($url, $code)
+    {
+        $this->url = $url;
+        $this->code = $code;
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -111,29 +123,6 @@ class Url
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Set type
-     *
-     * @param integer $type
-     * @return Url
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return integer 
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**
