@@ -26,11 +26,13 @@ class UrlController extends Controller
 
         $this->trackUrlVisit($link);
 
+        return $this->redirect($link->getUrl());
+        /* Url::getType removed
         $type = $link->getType();
 
         switch ($type) {
             case Url::TYPE_SIMPLE:
-                return $this->redirect($link->getUrl());
+                
             case Url::TYPE_MULTIPLE:
                 break;
             case Url::TYPE_PASSWORD:
@@ -39,7 +41,7 @@ class UrlController extends Controller
                 break;
             default:
                 throw new \InvalidArgumentException('Type not found...');
-        }
+        }*/
     }
 
     /**
@@ -64,7 +66,13 @@ class UrlController extends Controller
 
     private function trackUrlVisit($link)
     {
-        $tracker = new PiwikTracker($idSite = 1); // TODO
-        // TODO
+        $piwikUrl = $this->container->getParameter('piwik.url');
+
+        $tracker = new PiwikTracker($idSite = 1, $piwikUrl);
+        
+        /*
+        - list all tracking parameters
+        - set all tracking parameters
+        */
     }
 }

@@ -89,3 +89,6 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Clearcode\UrlerBundle\Entity\User
+
+parameters:
+    piwik.url: "" # must be set to Piwik URL
