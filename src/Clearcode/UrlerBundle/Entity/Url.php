@@ -2,6 +2,8 @@
 
 namespace Clearcode\UrlerBundle\Entity;
 
+use JMS\Serializer\Annotation\ExclusionPolicy;
+use JMS\Serializer\Annotation\Expose;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,31 +11,10 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table("urls")
  * @ORM\Entity(repositoryClass="Clearcode\UrlerBundle\Entity\UrlRepository")
+ * @ExclusionPolicy("all")
  */
 class Url
 {
-    /**
-     * Simple url type
-     */
-    const TYPE_SIMPLE = 10;
-
-    /**
-     * Multiple url type
-     *
-     * Gallery mode view
-     */
-    const TYPE_MULTIPLE = 20;
-
-    /**
-     * Password type url
-     */
-    const TYPE_PASSWORD = 30;
-
-    /**
-     * Ad url type
-     */
-    const TYPE_AD = 40;
-
     /**
      * @var integer
      *
@@ -47,20 +28,15 @@ class Url
      * @var string
      *
      * @ORM\Column(name="code", type="string", unique=true, length=6)
+     * @Expose
      */
     private $code;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="type", type="integer")
-     */
-    private $type;
 
     /**
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
+     * @Expose
      */
     private $url;
 
@@ -71,25 +47,19 @@ class Url
      */
     private $password;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="owner", type="string", length=255, nullable=true)
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="urls")
-     */
-    private $owner;
-
 
     /**
      * Constructor
      *
      * @param string $url
      * @param string $code
+     * @param string $password
      */
-    public function _construct($url, $code)
+    public function __construct($url, $code, $password = null)
     {
         $this->url = $url;
         $this->code = $code;
+        $this->password = $password;
     }
 
     /**
@@ -169,28 +139,5 @@ class Url
     public function getPassword()
     {
         return $this->password;
-    }
-
-    /**
-     * Set owner
-     *
-     * @param string $owner
-     * @return Url
-     */
-    public function setOwner($owner)
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return string 
-     */
-    public function getOwner()
-    {
-        return $this->owner;
     }
 }

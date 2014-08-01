@@ -4,8 +4,8 @@ parameters:
 services:
     clearcode_urler.generator.simple:
         class: %clearcode_urler.generator.simple.class%
-        arguments: ~
+        arguments: [ @doctrine.orm.entity_manager ]
 
     clearcode_urler.shortener:
         class: Clearcode\UrlerBundle\Services\ShortenerService
-        arguments: [ @clearcode_urler.generator.simple, @doctrine.orm.entity_manager ]
+        arguments: [ @clearcode_urler.generator.simple ]

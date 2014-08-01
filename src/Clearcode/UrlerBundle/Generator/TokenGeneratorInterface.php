@@ -9,5 +9,5 @@ interface TokenGeneratorInterface
      *
      * @return mixed
      */
-    public function generate();
+    public function generate($slug);
 } 

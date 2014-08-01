@@ -4,15 +4,9 @@ namespace Clearcode\UrlerBundle\Services;
 
 use Clearcode\UrlerBundle\Entity\Url;
 use Clearcode\UrlerBundle\Generator\TokenGeneratorInterface;
-use Doctrine\ORM\EntityManager;
 
 class ShortenerService
 {
-    /**
-     * @var EntityManager $em
-     */
-    private $em;
-
     /**
      * @var TokenGeneratorInterface $tokenGenerator
      */
@@ -20,49 +14,23 @@ class ShortenerService
 
     /**
      * @param TokenGeneratorInterface $tokenGenerator
-     * @param EntityManager $em
      */
-    public function _construct(TokenGeneratorInterface $tokenGenerator, EntityManager $em)
+    public function __construct(TokenGeneratorInterface $tokenGenerator)
     {
         $this->tokenGenerator = $tokenGenerator;
-        $this->em = $em;
-    }
-
-    /**
-     * Generate random shortened url with random code
-     *
-     * @param $url
-     *
-     * @return Url
-     */
-    public function shortenToRandom($url)
-    {
-        $token = $this->generator->generate();
-
-        $shortened = new Url($url, $token);
-
-        $this->em->persist($shortened);
-
-        return $shortened;
     }
 
     /**
      * Generate shortened link with slug as code
-     * @param $url
-     * @param $slug
+     *
+     * @param string $url
+     * @param string $slug
+     * @param string $password
      *
      * @return Url
      */
-    public function shortenToSlug($url, $slug)
+    public function shortenLink($url, $slug = null, $password = null)
     {
-        if ($this->em->getRepository('ClearcodeUrlerBundle:Url')->findOneByCode($slug)) {
-            throw new \InvalidArgumentException('This slug is already used.');
-        }
-
-        $shortened = new Url($url, $slug);
-
-        $this->em->persist($shortened);
-
-        return $shortened;
+        return new Url($url, $this->tokenGenerator->generate($slug), $password);
     }
 }
