@@ -143,7 +143,7 @@ class Url
      */
     public function setUrl($url)
     {
-        $this->type = $url;
+        $this->url = $url;
 
         return $this;
     }

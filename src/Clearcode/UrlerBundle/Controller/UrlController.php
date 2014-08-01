@@ -10,7 +10,7 @@ class UrlController extends Controller
     {
         $link = $this->getDoctrine()
             ->getRepository('ClearcodeUrlerBundle:Url')
-            ->findByCode($code);
+            ->findOneByCode($code);
 
         $type = $link->getType();
 
@@ -18,8 +18,7 @@ class UrlController extends Controller
             case Url::TYPE_SIMPLE:
                 $this->redirect($link->getUrl());
                 break;
-            case Url::TYPE_MULTIMPLE:
-
+            case Url::TYPE_MULTIPLE:
                 break;
             case Url::TYPE_PASSWORD:
                 break;
