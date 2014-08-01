@@ -1,3 +1,9 @@
+# OSX
+.DS_Store
+
+# PhpStorm
+.idea
+
 # Bootstrap
 app/bootstrap*
 
