@@ -3,5 +3,10 @@ clearcode_urler_homepage:
     defaults: { _controller: ClearcodeUrlerBundle:Default:index }
 
 clearcode_urler_resolve:
-    path:     /{code}
+    path:     /resolve/{code}
     defaults: { _controller: ClearcodeUrlerBundle:Url:resolve }
+
+clearcode_urler_shorten:
+    path:     /shorten
+    defaults: { _controller: ClearcodeUrlerBundle:Url:shorten }
+
