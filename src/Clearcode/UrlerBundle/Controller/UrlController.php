@@ -68,11 +68,35 @@ class UrlController extends Controller
     {
         $piwikUrl = $this->container->getParameter('piwik.url');
 
-        $tracker = new PiwikTracker($idSite = 1, $piwikUrl);
-        
+        $idSite = // TODO
+
+        $tracker = new PiwikTracker($idSite, $piwikUrl);
+        $tracker->seturl(); // TODO
+        $tracker->setUrlReferrer(); // TODO
+        $tracker->setCustomVariable($id, $name, $value, $scope = 'visit'); // TODO
+
+        $tracker->doTrackAction(); // TODO
+
+        // TODO: Forward HTTP_ACCEPT_LANGUAGE
+        //       Forward HTTP_USER_AGENT
+        //       Set X-Forwarded-For
         /*
-        - list all tracking parameters
+         - setAttributionInfo (campaign etc.)
+
+         - setPageCharset // ???
+
+         - doTrackGoal
+         - doTrackEvent
+
+         - cookies
+        */
+
+        /*
         - set all tracking parameters
+
+        TODO: test w/
+          * browser
+          * mobile
         */
     }
 }
