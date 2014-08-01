@@ -46,7 +46,7 @@ class Url
     /**
      * @var string
      *
-     * @ORM\Column(name="code", type="string", length=6)
+     * @ORM\Column(name="code", type="string", unique=true, length=6)
      */
     private $code;
 
@@ -67,14 +67,14 @@ class Url
     /**
      * @var string
      *
-     * @ORM\Column(name="password", type="string", length=32)
+     * @ORM\Column(name="password", type="string", length=32, nullable=true)
      */
     private $password;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="owner", type="string", length=255)
+     * @ORM\Column(name="owner", type="string", length=255, nullable=true)
      */
     private $owner;
 

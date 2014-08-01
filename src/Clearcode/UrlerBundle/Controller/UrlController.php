@@ -3,6 +3,7 @@
 namespace Clearcode\UrlerBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Clearcode\UrlerBundle\Entity\Url;
 
 class UrlController extends Controller
 {
@@ -12,11 +13,15 @@ class UrlController extends Controller
             ->getRepository('ClearcodeUrlerBundle:Url')
             ->findOneByCode($code);
 
+        if (!$link) {
+            throw $this->createNotFoundException('Link not found');
+        }
+
         $type = $link->getType();
 
         switch ($type) {
             case Url::TYPE_SIMPLE:
-                $this->redirect($link->getUrl());
+                return $this->redirect($link->getUrl());
                 break;
             case Url::TYPE_MULTIPLE:
                 break;
@@ -25,7 +30,7 @@ class UrlController extends Controller
             case Url::TYPE_AD:
                 break;
             default:
-                throw new \InvalidArgumentException('Link not found...');
+                throw new \InvalidArgumentException('Type not found...');
         }
     }
 }
