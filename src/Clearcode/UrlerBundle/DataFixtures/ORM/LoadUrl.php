@@ -3,10 +3,12 @@
 namespace Acme\HelloBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Clearcode\UrlerBundle\Entity\Url;
 
-class LoadUserData implements FixtureInterface
+class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritDoc}
@@ -26,10 +28,16 @@ class LoadUserData implements FixtureInterface
             $object->setCode($url['code']);
             $object->setType($url['type']);
             $object->setUrl($url['url']);
+            $object->setOwner($this->getReference('user-default'));
 
             $manager->persist($object);
         }
 
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 50;
     }
 }
