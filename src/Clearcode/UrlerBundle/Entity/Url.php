@@ -75,6 +75,7 @@ class Url
      * @var string
      *
      * @ORM\Column(name="owner", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="urls")
      */
     private $owner;
 
