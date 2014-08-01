@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Url
  *
- * @ORM\Table('urls')
+ * @ORM\Table("urls")
  * @ORM\Entity(repositoryClass="Clearcode\UrlerBundle\Entity\UrlRepository")
  */
 class Url
