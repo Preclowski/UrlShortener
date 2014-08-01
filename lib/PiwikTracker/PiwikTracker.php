@@ -219,6 +219,16 @@ class PiwikTracker
         $this->storedTrackingActions = array();
 
         $this->visitorCustomVar = $this->getCustomVariablesFromCookie();
+
+        $this->extraHttpHeaders = array();
+    }
+
+    /**
+     * TODO
+     */
+    public function addExtraHttpHeader($headerText)
+    {
+        $this->extraHttpHeaders[] = $headerText;
     }
 
     /**
@@ -1229,6 +1239,10 @@ class PiwikTracker
                 $options[CURLOPT_HTTPHEADER][] = 'Content-Type: application/json';
                 $options[CURLOPT_HTTPHEADER][] = 'Expect:';
                 $options[CURLOPT_POSTFIELDS] = $data;
+            }
+
+            if (!empty($this->extraHttpHeaders)) {
+                $options[CURLOPT_HTTPHEADER] = array_merge($this->extraHttpHeaders, $options[CURLOPT_HTTPHEADER]);
             }
 
             $ch = curl_init();

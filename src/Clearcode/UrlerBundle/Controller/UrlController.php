@@ -27,7 +27,7 @@ class UrlController extends Controller
         $this->trackUrlVisit($link);
 
         return $this->redirect($link->getUrl());
-        /* Url::getType removed
+        /* Url::getType was removed
         $type = $link->getType();
 
         switch ($type) {
@@ -67,33 +67,33 @@ class UrlController extends Controller
     private function trackUrlVisit($link)
     {
         $piwikUrl = $this->container->getParameter('piwik.url');
+        $ipAddress = $this->container->get('request')->getClientIp();
 
         $idSite = // TODO
 
         $tracker = new PiwikTracker($idSite, $piwikUrl);
-        $tracker->seturl(); // TODO
-        $tracker->setUrlReferrer(); // TODO
-        $tracker->setCustomVariable($id, $name, $value, $scope = 'visit'); // TODO
+        $tracker->seturl($link->getUrl());
+        $tracker->setUrlReferrer($_SERVER['HTTP_REFERER']);
+        $tracker->addExtraHttpHeader("X-Forwarded-For: " . $ipAddress);
+        $tracker->addExtraHttpHeader("User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
+        $tracker->addExtraHttpHeader("Accept-Language: " . $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        $tracker->doTrackAction(); // TODO
+        // can track other data if you want, ie, user can set data to be tracked for a specific URL and this can be tracked here.
+        // OR! can add a 
+        // $tracker->setCustomVariable($id, $name, $value, $scope = 'visit'); // TODO
 
-        // TODO: Forward HTTP_ACCEPT_LANGUAGE
-        //       Forward HTTP_USER_AGENT
-        //       Set X-Forwarded-For
-        /*
+        // actionName must be set to something, can be name of a single URL or URL group or whatever.
+        $tracker->doTrackAction($actionName); // TODO
+
+        /* other stuff you may want to do later.
          - setAttributionInfo (campaign etc.)
-
-         - setPageCharset // ???
-
          - doTrackGoal
          - doTrackEvent
 
-         - cookies
+         - enableCookies (can enable cookies in PiwikTracker if you want to track visitors, otherwise everyone will be a new visitor. visitors are tracked by an ID that is stored in a cookie.)
         */
 
         /*
-        - set all tracking parameters
-
         TODO: test w/
           * browser
           * mobile
