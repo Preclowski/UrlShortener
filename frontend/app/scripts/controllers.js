@@ -21,4 +21,15 @@ angular.module('urlerApp')
         });
       }
     };
+  })
+  .controller('ResultsCtrl', function ($scope, $rootScope) {
+    $scope.open = false;
+
+    $scope.results = [];
+
+    $rootScope.$on('links.shorten', function (evt, data) {
+      $scope.open = true;
+
+      $scope.results.push(data);
+    });
   });
