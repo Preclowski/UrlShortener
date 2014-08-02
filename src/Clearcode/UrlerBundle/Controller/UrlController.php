@@ -31,7 +31,7 @@ class UrlController extends Controller
         $tracker->addExtraHttpHeader("User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
         $tracker->addExtraHttpHeader("Accept-Language: " . $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        $tracker->doTrackAction($actionName, 'link');
+        $tracker->doTrackPageView($actionName);
 
         return $this->redirect($link->getUrl());
     }
