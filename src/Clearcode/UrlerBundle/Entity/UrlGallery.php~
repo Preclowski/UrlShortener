@@ -3,17 +3,15 @@
 namespace Clearcode\UrlerBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation\ExclusionPolicy;
-use JMS\Serializer\Annotation\Expose;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Url
+ * UrlGallery
  *
- * @ORM\Table("urls")
- * @ORM\Entity()
- * @ExclusionPolicy("all")
+ * @ORM\Table(name="galleries")
+ * @ORM\Entity(repositoryClass="Clearcode\UrlerBundle\Entity\UrlGalleryRepository")
  */
-class Url
+class UrlGallery
 {
     /**
      * @var integer
@@ -25,21 +23,27 @@ class Url
     private $id;
 
     /**
-     * @var string
+     * @var ArrayCollection
      *
-     * @ORM\Column(name="code", type="string", unique=true, length=6)
-     * @Expose
+     * @ORM\OneToMany(targetEntity="UrlGalleryItem", mappedBy="gallery")
      */
-    private $code;
+    private $urls;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=255)
-     * @Expose
+     * @ORM\Column(name="code", type="string", length=255)
      */
-    private $url;
+    private $code;
 
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->urls = new ArrayCollection;
+    }
 
     /**
      * Get id
@@ -55,7 +59,7 @@ class Url
      * Set code
      *
      * @param string $code
-     * @return Url
+     * @return UrlGallery
      */
     public function setCode($code)
     {
@@ -72,28 +76,5 @@ class Url
     public function getCode()
     {
         return $this->code;
-    }
-
-    /**
-     * Set url
-     *
-     * @param string $url
-     * @return Url
-     */
-    public function setUrl($url)
-    {
-        $this->url = $url;
-
-        return $this;
-    }
-
-    /**
-     * Get url
-     *
-     * @return string
-     */
-    public function getUrl()
-    {
-        return $this->url;
     }
 }

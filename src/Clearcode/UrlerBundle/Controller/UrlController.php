@@ -2,11 +2,9 @@
 
 namespace Clearcode\UrlerBundle\Controller;
 
-use Clearcode\UrlerBundle\Exception\InvalidTokenException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Clearcode\UrlerBundle\Entity\Url;
-use FOS\RestBundle\Controller\Annotations\QueryParam;
-use FOS\RestBundle\Controller\Annotations\View;
+use PiwikTracker;
 
 class UrlController extends Controller
 {
@@ -20,51 +18,21 @@ class UrlController extends Controller
             throw $this->createNotFoundException('Link not found');
         }
 
-        $type = $link->getType();
+        $idSite = 7;
+        $piwikUrl = $this->container->getParameter('piwik.url');
+        $ipAddress = $this->container->get('request')->getClientIp();
 
-        switch ($type) {
-            case Url::TYPE_SIMPLE:
-                return $this->redirect($link->getUrl());
-                break;
-            case Url::TYPE_MULTIPLE:
-                break;
-            case Url::TYPE_PASSWORD:
-                break;
-            case Url::TYPE_AD:
-                break;
-            default:
-                throw new \InvalidArgumentException('Type not found...');
-        }
-    }
+        $tracker = new \PiwikTracker($idSite, $piwikUrl);
+        $actionName = $link->getCode();
 
-    /**
-     * @param $url
-     * @throws InvalidTokenException
-     * @return Url
-     *
-     * @QueryParam(
-     *      name="url",
-     *      requirements=".*",
-     *      strict=true,
-     *      nullable=false,
-     *      description="Url address that will be shortened.")
-     * @View()
-     */
-    public function shortenAction($url)
-    {
-        $urlObject = new Url();
-        $urlObject->setUrl($url);
-        $urlObject->setType(Url::TYPE_SIMPLE);
-        $code = $this->get('clearcode_ruler.generator.simple')->generate();
-        if (strlen($code) != 6) {
-            throw new InvalidTokenException();
-        }
-        $urlObject->setCode($code);
+        $tracker->seturl($link->getUrl());
+        $tracker->setUrlReferrer($this->getRequest()->headers->get('HTTP_REFERER'));
+        $tracker->addExtraHttpHeader("X-Forwarded-For: " . $ipAddress);
+        $tracker->addExtraHttpHeader("User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
+        $tracker->addExtraHttpHeader("Accept-Language: " . $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($urlObject);
-        $em->flush($urlObject);
+        $tracker->doTrackAction($actionName, 'link');
 
-        return $urlObject;
+        return $this->redirect($link->getUrl());
     }
 }

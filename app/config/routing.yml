@@ -22,3 +22,4 @@ fos_user_change_password:
 clearcode_urler:
     resource: "@ClearcodeUrlerBundle/Resources/config/routing.yml"
     prefix:   /
+    type:     rest

@@ -72,13 +72,7 @@ fos_rest:
     routing_loader:
         default_format: json
     view:
-        view_response_listener: force
-    param_fetcher_listener: force
-    body_converter:
-        enabled: true
-    format_listener:
-        rules:
-            - { path: '^/', priorities: ['json', 'html'], fallback_format: json, prefer_extension: true }
+        view_response_listener: true
 
 sensio_framework_extra:
     view:     { annotations: false }
@@ -89,3 +83,6 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Clearcode\UrlerBundle\Entity\User
+
+parameters:
+    piwik.url: "" # must be set to Piwik URL

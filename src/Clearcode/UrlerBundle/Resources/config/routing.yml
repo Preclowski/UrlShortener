@@ -2,11 +2,13 @@ clearcode_urler_homepage:
     path:     /
     defaults: { _controller: ClearcodeUrlerBundle:Default:index }
 
-clearcode_urler_shorten:
-    path:     /shorten
-    defaults: { _controller: ClearcodeUrlerBundle:Url:shorten }
+clearcode_urler_api:
+    resource: Clearcode\UrlerBundle\Controller\ApiController
+    type:     rest
 
 clearcode_urler_resolve:
     path:     /{code}
     defaults: { _controller: ClearcodeUrlerBundle:Url:resolve }
-
+    methods:  [GET]
+    requirements:
+        code: \d+
