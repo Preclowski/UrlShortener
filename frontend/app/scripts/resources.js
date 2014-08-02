@@ -3,5 +3,5 @@
 angular.module('urlerApp')
   .factory('Shorten', function ($resource) {
 
-    return $resource('shorten.json');
+    return $resource('http://urler.dev/url');
   });

@@ -71,7 +71,7 @@ class Url
      */
     public function getCode()
     {
-        return $this->code;
+        return 'http://urler.com/' . $this->code;
     }
 
     /**
