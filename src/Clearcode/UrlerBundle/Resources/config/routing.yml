@@ -9,3 +9,6 @@ clearcode_urler_api:
 clearcode_urler_resolve:
     path:     /{code}
     defaults: { _controller: ClearcodeUrlerBundle:Url:resolve }
+    methods:  [GET]
+    requirements:
+        code: \d+

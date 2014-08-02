@@ -31,13 +31,9 @@ class SimpleTokenGenerator implements TokenGeneratorInterface
      *
      * @return mixed
      */
-    public function generate($slug)
+    public function generate()
     {
-        if (empty($slug)) {
-            return $this->generateRandom();
-        } else {
-            return $this->checkForSlug($slug);
-        }
+        return $this->generateRandom();
     }
 
     /**

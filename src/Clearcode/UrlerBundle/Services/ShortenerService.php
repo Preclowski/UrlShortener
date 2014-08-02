@@ -3,6 +3,8 @@
 namespace Clearcode\UrlerBundle\Services;
 
 use Clearcode\UrlerBundle\Entity\Url;
+use Clearcode\UrlerBundle\Entity\UrlGallery;
+use Clearcode\UrlerBundle\Entity\UrlGalleryItem;
 use Clearcode\UrlerBundle\Generator\TokenGeneratorInterface;
 
 class ShortenerService
@@ -24,13 +26,33 @@ class ShortenerService
      * Generate shortened link with slug as code
      *
      * @param string $url
-     * @param string $slug
-     * @param string $password
-     *
      * @return Url
      */
-    public function shortenLink($url, $slug = null, $password = null)
+    public function shortenLink($url)
     {
-        return new Url($url, $this->tokenGenerator->generate($slug), $password);
+        $link = new Url;
+        $link->setUrl($url);
+        $link->setCode($this->tokenGenerator->generate());
+
+        return $link;
+    }
+
+    /**
+     * Generate gallery of links
+     *
+     * @param array $urls
+     * @param null $slug
+     * @param null $password
+     * @return UrlGallery
+     */
+    public function shortenGallery(array $urls, $slug = null, $password = null)
+    {
+        $gallery = new UrlGallery($slug, $password);
+
+        foreach ($urls as $url) {
+            $gallery->addUrl(new UrlGalleryItem($url));
+        }
+
+        return $gallery;
     }
 }
