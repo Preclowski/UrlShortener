@@ -18,18 +18,20 @@ class UrlController extends Controller
             throw $this->createNotFoundException('Link not found');
         }
 
+        $idSite = 7;
         $piwikUrl = $this->container->getParameter('piwik.url');
         $ipAddress = $this->container->get('request')->getClientIp();
 
-        $tracker = new PiwikTracker($idSite, $piwikUrl);
+        $tracker = new \PiwikTracker($idSite, $piwikUrl);
+        $actionName = $link->getCode();
 
         $tracker->seturl($link->getUrl());
-        $tracker->setUrlReferrer($_SERVER['HTTP_REFERER']);
+        $tracker->setUrlReferrer($this->getRequest()->headers->get('HTTP_REFERER'));
         $tracker->addExtraHttpHeader("X-Forwarded-For: " . $ipAddress);
         $tracker->addExtraHttpHeader("User-Agent: " . $_SERVER['HTTP_USER_AGENT']);
         $tracker->addExtraHttpHeader("Accept-Language: " . $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
-        $tracker->doTrackAction($actionName);
+        $tracker->doTrackAction($actionName, 'link');
 
         return $this->redirect($link->getUrl());
     }
