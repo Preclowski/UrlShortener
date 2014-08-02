@@ -34,6 +34,3 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
-
-parameters:
-    piwik.url: "http://localhost/index.php" # must be set to Piwik URL
